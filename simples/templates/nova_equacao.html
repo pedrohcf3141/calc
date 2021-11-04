@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    <fieldset>
+            Primeiro Valor(Obrigatório) 
+            {{form.valor1}}           
+            Segundo Valor
+            {{form.valor2}}
+            Operação
+            {{form.operacao}} 
+            {{form.submit}}
+    </fieldset>
+</form>
+{% endblock %}

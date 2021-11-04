@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora</title>
+</head>
+<body>
+    <a href="{{url_for('index')}}"><button>inicio</button></a>
+    <a href="{{url_for('equacoes')}}"><button>Equacoes</button></a>
+
+
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ titulo }}</h1>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

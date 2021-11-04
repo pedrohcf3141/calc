@@ -1,0 +1,11 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    <fieldset>
+            {{form.nome}}
+            {{form.submit}}
+    </fieldset>
+</form>
+{% endblock %}

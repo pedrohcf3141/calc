@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+{% block content %}
+<form method="POST" action="">
+    <tbody>
+                <input type="text" name="angulo">
+                <button type="submit">Calcular</button>
+            <br>
+            {% if resp%}
+            <p>Resposta {{resp}}</p>
+            {%endif%}
+        </tbody>
+    </table>
+</form>
+
+{% endblock %}

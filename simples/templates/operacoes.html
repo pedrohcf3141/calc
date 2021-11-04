@@ -1,0 +1,19 @@
+{% extends 'template.html' %}
+{% block content %}
+<table class="table table-striped table-responsive table-bordered">
+    <thead class="thead-default">
+        <tr>
+            <th>Operacao</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for operacao in operacoes %}
+        <tr>
+            <td>{{ operacao.nome }}</td>
+            <td><a href='/operacoes/{{ operacao.id }}'>Editar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <a href="{{url_for('nova_operacao')}}"><button>Nova Operacao</button></a>
+</table>
+{% endblock %}

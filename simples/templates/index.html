@@ -1,0 +1,71 @@
+{% extends 'template.html' %}
+{% block content %}
+<table class="table table-striped table-responsive table-bordered">
+    <thead class="thead-default">
+        <tr>
+            <th>ID</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Argumentos</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Tipo</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Resposta</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <th>Data da operação</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for equacao in equacoes %}
+        <tr>
+            <th>{{ equacao.id }}</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ equacao.valor1 }}</td>
+            {% for operacao in operacoes %}
+                {% if operacao.id == equacao.operacao%}
+                    {% if operacao.nome != 'Cotangente'%}
+                        <td>{{ equacao.valor2 }}</td>
+                        
+                    {% else %}
+                        <td>---</td>
+                    {% endif%}
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{operacao}}</td>
+                {% endif %}
+            {% endfor %}
+            
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ equacao.resposta }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ equacao.criado_em }}</td>
+            <!-- <td><a href='/equacoes/{{ equacao.id }}'>Editar</a></td> -->
+        </tr>
+        {% endfor %}
+    </tbody>
+    <a href="{{url_for('nova_equacao')}}"><button>Nova Equação</button></a>
+</table>
+{% endblock %}

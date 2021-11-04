@@ -1,0 +1,56 @@
+{% extends 'template.html' %}
+{% block content %}
+
+    {{equacao.nome}}
+    <table>
+        <tr>
+            <td>Valor</th>
+        </tr>
+        {% for t in valores_qs %}
+        <tr>
+            <td>{{t.valor}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+        <form method="POST" action="">
+            {{ form.csrf_token }}
+            <fieldset>
+                {{form.valor}}
+                {{form.submit}}
+            </fieldset>
+    
+    <table>
+    <tr>
+        <td>Operações</th>
+    </tr>
+    {% for t in operacoes_qs %}
+    <tr>
+        <td>{{t.operacao}}</td>
+    </tr>
+    {%endfor%}
+    </table>
+    <form method="POST" action="">
+        {{ form.csrf_token }}
+        <fieldset>
+            {{form.operacao}}
+            {{form.submit}}
+        </fieldset>
+    </form>
+    <table>
+        <tr>
+            <td>Valor</th>
+        </tr>
+        {% for t in valores_qs %}
+        <tr>
+            <td>{{t.valor}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+        <form method="POST" action="">
+            {{ form.csrf_token }}
+            <fieldset>
+                {{form.valor}}
+                {{form.submit}}
+            </fieldset>
+        </form>
+{% endblock %}
