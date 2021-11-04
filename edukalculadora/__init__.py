@@ -14,5 +14,5 @@ manager = Manager(app)
 # mysql = MySQL(app)
 
 
-from edu-kalculadora.controllers import urls
-from edu-kalculadora.models import tables
+from edukalculadora.controllers import urls
+from edukalculadora.models import tables

@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey
 from datetime import datetime
-from edu-kalculadora.db import db
-from edu-kalculadora import app
+from edukalculadora.db import db
+from edukalculadora import app
 import math
 
 class Operacao(db.Model):

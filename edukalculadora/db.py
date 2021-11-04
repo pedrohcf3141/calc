@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
-from edu-kalculadora import app, manager
+from edukalculadora import app, manager
 
 
 db = SQLAlchemy(app)

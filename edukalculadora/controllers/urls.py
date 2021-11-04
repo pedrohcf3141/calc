@@ -1,18 +1,18 @@
 from typing import Dict
-from edu-kalculadora.db import db
+from edukalculadora.db import db
 from flask import (
     Flask, render_template,
     url_for, request, flash,
     redirect, session
     )
-from edu-kalculadora.models.tables import (
+from edukalculadora.models.tables import (
     Operacao, Equacao
 )
 from .forms import(
     OperacaoForm,
     EquacaoForm
 )
-from edu-kalculadora import app
+from edukalculadora import app
 from datetime import timedelta
 
 @app.route("/")

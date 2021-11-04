@@ -11,10 +11,10 @@ from wtforms.validators import(
     InputRequired, Length,
     AnyOf, DataRequired, NumberRange
 )
-from edu-kalculadora.models.tables import (
+from edukalculadora.models.tables import (
     Operacao, Equacao
 )
-from edu-kalculadora import app
+from edukalculadora import app
 
 
 class OperacaoForm(FlaskForm):

@@ -13,8 +13,8 @@ from models import tables
 # def index():
 #     return render_template("index.html") 
 
-# @app.route("/edu-kalculadora", methods=['GET', 'POST'])
-# def edu-kalculadora():
+# @app.route("/edukalculadora", methods=['GET', 'POST'])
+# def edukalculadora():
 #     resp = ''
 #     if request.method == 'POST' and 'nro1' in request.form and 'operacao' in request.form and 'nro2' in request.form:
 #         nro1 = request.form.get('nro1')
@@ -35,7 +35,7 @@ from models import tables
 #             resp = dic_operacoes[operacao]
 #         else:
 #             resp = 'Operação Invalida'
-#     return render_template('edu-kalculadora.html', resp=resp)
+#     return render_template('edukalculadora.html', resp=resp)
 
 
 # @app.route("/cotangente", methods=['GET', 'POST'])
