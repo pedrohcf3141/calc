@@ -12,7 +12,7 @@ from wtforms.validators import(
     AnyOf, DataRequired, NumberRange
 )
 from edukalculadora.models.tables import (
-    Operacao, Equacao
+    Operacao, Equacao, Mudanca
 )
 from edukalculadora import app
 
@@ -29,7 +29,7 @@ class OperacaoForm(FlaskForm):
     submit = SubmitField('Adicinar')
 
 
-class EquacaoForm(FlaskForm):
+class MudancaForm(FlaskForm):
     valor1 = FloatField(
         'Primeiro Valor',
         validators=[
@@ -42,7 +42,14 @@ class EquacaoForm(FlaskForm):
         get_pk=lambda u: u.id,
         get_label=lambda u: u.nome
     )
-    valor2 = FloatField('Segundo Valor')
+    valor2 = FloatField(
+        'Segundo Valor',
+        validators=[
+            DataRequired(message='Uma Instrução é exigida'),
+            ]
+        )
+    submit = SubmitField('Nova Mudanca')
 
 
-    submit = SubmitField('Nova Equação')
+class EquacaoForm(FlaskForm):
+    mudanca = FieldList(FormField(MudancaForm), min_entries=1)

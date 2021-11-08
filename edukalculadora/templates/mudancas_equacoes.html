@@ -1,0 +1,63 @@
+{% extends 'template.html' %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    <fieldset> 
+            {{form.mudanca}}           
+            {{form.submit}}
+    </fieldset>
+<table class="table table-striped table-responsive table-bordered">
+    <thead class="thead-default">
+        <tr>
+            <th>ID</th>
+            <td></td>
+            <th>Argumento 1</th>
+            <td></td>
+            <th>Argumento 2</th>
+            <td></td>
+            <th>Tipo</th>
+            <td></td>
+            <th>Resposta</th>
+            <td></td>
+            <th>Modificada em</th>
+            <td></td>   
+            <th>Criada em</th>
+            <td></td>
+            <th>Deletar</th>
+            <td></td>
+            <th>Cotangente</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equacao in equacao_mudancas_qs%}
+        <tr>
+            <th>{{ equacao.id }}</th>
+            <td></td>
+            <td>{{ equacao.valor1 }}</td>
+            <td></td>
+            <td>{{ equacao.valor2 }}</td>
+            <td></td>
+            {% for operacao in operacoes %}
+                {% if operacao.id == equacao.operacao%}
+                    <td>{{operacao}}</td>
+                {% endif %}
+            {% endfor %}
+            <td></td>
+            <td>{{ equacao.calculo }}</td>
+            <td></td>
+            <td>{{ equacao.modificado_em }}</td>
+            <td></td>
+            <td>{{ equacao.criado_em }}</td>
+            <td></td>
+            <td>{{ equacao.cotg }}</td>
+            <td></td>
+            <td><a href='/equacoes/{{ equacao.id }}/delete_equacao/'>Deletar</a></td>
+            <td></td>
+            <td><a href='/equacoes/{{ equacao.id }}/cotg/'>Cotangente</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</form>
+
+{% endblock %}

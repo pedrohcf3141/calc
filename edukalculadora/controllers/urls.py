@@ -6,20 +6,20 @@ from flask import (
     redirect, session
     )
 from edukalculadora.models.tables import (
-    Operacao, Equacao
+    Operacao, Equacao, Mudanca
 )
 from .forms import(
     OperacaoForm,
-    EquacaoForm
+    EquacaoForm,
+    MudancaForm,
 )
 from edukalculadora import app
 from datetime import timedelta
 
 @app.route("/")
 def index():
-    operacoes = Operacao.query.all()
     equacoes = Equacao.query.all()
-    return render_template("index.html", equacoes=equacoes, operacoes=operacoes) 
+    return render_template("index.html", equacoes=equacoes) 
     
 
 @app.route('/operacoes')
@@ -69,45 +69,75 @@ def equacoes():
 
 @app.route("/nova_equacao", methods=['POST', 'GET'])
 def nova_equacao():
-    form = EquacaoForm()
-    if form.validate_on_submit():
-        equacao = Equacao(
+    form = MudancaForm()
+    if form.validate_on_submit():     
+        equacao = Equacao()
+        db.session.add(equacao)
+        db.session.commit()
+        mudanca = Mudanca(
             valor1=form.valor1.data,
             valor2=form.valor2.data,
-            operacao = form.operacao.data.id
+            operacao = form.operacao.data.id,
+            equacao = equacao.id, 
         )
-        db.session.add(equacao)
+        mudanca.calculo
+        db.session.add(mudanca)
         db.session.commit()
         flash('Equacao Criada com Sucesso')
         return redirect(url_for('index'))
     return render_template ('nova_equacao.html', titulo="Nova Equacao", form=form)
 
+@app.route("/equacoes/<int:id>/mudancas/", methods=['POST', 'GET'])
+def mudancas_equacao(id):
+    operacoes = Operacao.query.all()
+    equacao = Equacao.query.get_or_404(id)
+    form = EquacaoForm()
+    equacao_mudancas_qs = Mudanca.query.filter_by(equacao=id)
+    if form.mudanca.data and form.mudanca.data[0]['submit'] == True:
+        for mudanca in form.mudanca.data:
+            mudanca = Mudanca(
+            valor1=mudanca['valor1'],
+            valor2=mudanca['valor2'],
+            operacao = mudanca['operacao'].id,
+            equacao = id, 
+            )
+            mudanca.calculo
+            db.session.add(mudanca)
+            db.session.commit()
+            flash('Mudanca Criada com Sucesso')        
+            # return render_template(
+            #     'mudancas_equacoes.html',
+            #     id=equacao.id,
+            #     titulo=f"Equação {equacao.id}",
+            #     form=form,
+            #     equacao_mudancas_qs=equacao_mudancas_qs,
+            #     operacoes=operacoes,
+            # )   
+        return redirect(f"/equacoes/{mudanca.equacao}/mudancas/")
 
-# @app.route("/equacoes/<int:id>", methods=['POST', 'GET'])
-# def change_equacoes(id):
-#     equacao = Equacao.query.get_or_404(id)
-#     form = EquacaoOperacaoValorForm()
-#     # if form.validate_on_submit():
-#     if form.operacao.data and form.operacao.data[0]['submit'] == True:
-#         for indice in form.operacao.data:
-#             operacao = EquacaoOperacao(
-#                 operacao=indice['equacao'],
-#                 equacao_id=id
-#             )
-#             db.session.add(operacao)
-#             db.session.commit()
-#             return redirect(url_for('change_equacoes', id=equacao.id))
+    equacao_mudancas_qs = Mudanca.query.filter_by(equacao=id)
+    return render_template(
+        'mudancas_equacoes.html',
+        id=equacao.id,
+        titulo=f"LOGS da Equação {equacao.id}",
+        form=form,
+        equacao_mudancas_qs=equacao_mudancas_qs,
+        operacoes=operacoes,
+    )   
 
-#     if form.valor.data and form.valor.data[0]['submit']== True:
-#         for indice in form.valor.data:
-#             valor = EquacaoValor(
-#                 valor=indice['valor'],
-#                 equacao_id=id,
-#             )
-#             db.session.add(valor)
-#             db.session.commit()
-#             return redirect(url_for('change_equacoes', id=equacao.id))
-#     operacoes_qs = EquacaoOperacao.query.filter_by(equacao_id=id)
-#     valores_qs = EquacaoValor.query.filter_by(equacao_id=id)
-#     return render_template('equacoes.html', titulo="Equações", equacao=equacao, form=form, operacoes_qs=operacoes_qs, valores_qs=valores_qs)
+@app.route("/equacoes/<int:id>/delete_equacao/", methods=['POST', 'GET'])
+def delete_equacao(id):
+    mudanca = Mudanca.query.get(id)
+    db.session.delete(mudanca)
+    db.session.commit()
+    flash('', 'success')
+    return redirect(f"/equacoes/{mudanca.equacao}/mudancas/")
 
+@app.route("/equacoes/<int:id>/cotg/", methods=['POST', 'GET'])
+def cotangente(id):
+    mudanca = Mudanca.query.get(id)
+    mudanca.cotangente()
+    db.session.add(mudanca)
+    db.session.commit()
+    flash('', 'success')
+    return redirect(f"/equacoes/{mudanca.equacao}/mudancas/")

@@ -5,23 +5,7 @@
         <tr>
             <th>ID</th>
             <td></td>
-            <td></td>
-            <td></td>
-            <th>Argumentos</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <th>Tipo</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <th>Resposta</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <th>Data da operação</th>
+            <th>MUDANCAS</th>
 
         </tr>
     </thead>
@@ -30,39 +14,7 @@
         <tr>
             <th>{{ equacao.id }}</th>
             <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ equacao.valor1 }}</td>
-            {% for operacao in operacoes %}
-                {% if operacao.id == equacao.operacao%}
-                    {% if operacao.nome != 'Cotangente'%}
-                        <td>{{ equacao.valor2 }}</td>
-                        
-                    {% else %}
-                        <td>---</td>
-                    {% endif%}
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{operacao}}</td>
-                {% endif %}
-            {% endfor %}
-            
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ equacao.resposta }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ equacao.criado_em }}</td>
-            <!-- <td><a href='/equacoes/{{ equacao.id }}'>Editar</a></td> -->
+            <td><a href='/equacoes/{{ equacao.id }}/mudancas/'>Mudancas</a></td> -->
         </tr>
         {% endfor %}
     </tbody>
