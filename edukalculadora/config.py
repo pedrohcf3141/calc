@@ -1,4 +1,4 @@
-ENV ='dev'
+ENV ='prod'
 if ENV == 'dev':
     DEBUG = True
     # SQLALCHEMY_DATABASE_URI ='mysql+pymysql://newuser:password@localhost/calculadora'
