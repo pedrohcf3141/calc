@@ -56,8 +56,8 @@ class Mudanca(db.Model):
         dicionario_operacoes = {
             1:self.soma,
             2:self.subtracao,
-            4:self.multiplicacao,
-            3:self.divisao
+            3:self.multiplicacao,
+            4:self.divisao
         }
         if self.operacao in dicionario_operacoes:
             self.resposta = dicionario_operacoes[self.operacao]
