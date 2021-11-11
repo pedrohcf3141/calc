@@ -48,7 +48,7 @@ class MudancaForm(FlaskForm):
             DataRequired(message='Uma Instrução é exigida'),
             ]
         )
-    submit = SubmitField('Nova Mudanca')
+    submit = SubmitField('Adicinar')
 
 
 class EquacaoForm(FlaskForm):
