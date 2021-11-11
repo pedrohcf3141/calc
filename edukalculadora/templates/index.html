@@ -5,17 +5,44 @@
         <tr>
             <th>ID</th>
             <td></td>
+            <th>VALOR 1</th>
+            <td></td>
+            <th>OPERACAO</th>
+            <td></td>
+            <th>VALOR 2</th>
+            <td></td>
+            <th>RESPOSTA</th>
+            <td></td>
+            <th>COTANGENTE(SE HOUVER)</th>
+            <td></td>
             <th>LOGS</th>
-
         </tr>
     </thead>
     <tbody>
-        {% for equacao in equacoes %}
-        <tr>
-            <th>{{ equacao.id }}</th>
-            <td></td>
-            <td><a href='/equacoes/{{ equacao.id }}/mudancas/'>LOGS</a></td>
-        </tr>
+        {% for equacao in equacoes  %}
+                    <tr>                             
+                        <td>{{equacao.id}}</td>    
+                        <td></td>
+                        <td>{{equacao.mudancas[-1].valor1}}</td>
+                        <td></td>
+                        {% for operacao in operacoes %}
+                        {% if operacao.id == equacao.mudancas[-1].operacao%}
+                            <td>{{operacao}}</td>
+                        {% endif %}
+                    {% endfor %}
+                        <td></td>
+                        <td>{{equacao.mudancas[-1].valor2}}</td>
+                        <td></td>
+                        <td>{{equacao.mudancas[-1].resposta}}</td>
+                        <td></td>
+                        {%if equacao.mudancas[-1].cotg%}
+                        <td>{{equacao.mudancas[-1].cotg}}</td>
+                        {%else%}
+                        <td>---</td>
+                        {%endif%}
+                        <td></td>
+                        <td><a href='/equacoes/{{ equacao.id }}/mudancas/'>LOGS</a></td>
+                    </tr>
         {% endfor %}
     </tbody>
 </table>

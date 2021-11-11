@@ -17,6 +17,10 @@ class Operacao(db.Model):
     def __str__(self):
         return self.nome
 
+# class TipoEquacao(db.Model):
+#     pass
+
+
 
 class Mudanca(db.Model):
     __tablename__ = "mudancas"

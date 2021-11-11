@@ -18,8 +18,10 @@ from datetime import timedelta
 
 @app.route("/")
 def index():
+    operacoes = Operacao.query.all()
+    mudancas = Mudanca.query.all()
     equacoes = Equacao.query.all()
-    return render_template("index.html", equacoes=equacoes) 
+    return render_template("index.html", equacoes=equacoes, operacoes=operacoes, mudancas=mudancas) 
     
 
 @app.route('/operacoes')
