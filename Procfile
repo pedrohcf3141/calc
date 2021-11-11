@@ -1,1 +1,1 @@
-web: gunicorn edukalculadora:app
+web: gunicorn edu-kalculadora:app
