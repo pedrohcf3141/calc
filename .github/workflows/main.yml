@@ -22,9 +22,14 @@ jobs:
     - name: Execução de Teste de unidades
       run: |
         python -m pytest
-    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "edu-kalculadora" #Must be unique in Heroku
-        heroku_email: ${{secrets.HEROKU_EMAIL}}
-        usedocker: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "edukalculadora" #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
