@@ -22,9 +22,7 @@ jobs:
     - name: Execução de Teste de unidades
       run: |
         python -m pytest
-
-jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
