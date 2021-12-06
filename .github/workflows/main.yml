@@ -22,13 +22,9 @@ jobs:
     - name: Execução de Teste de unidades
       run: |
         python -m pytest
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "edukalculadora"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+    - name: Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "edukalculadora"
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
